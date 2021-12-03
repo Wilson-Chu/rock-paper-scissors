@@ -1,3 +1,16 @@
+let playerScore = 0, computerScore = 0;
+let input;
+//const buttons = document.querySelectorAll('.btn');
+
+const rockBtn = document.getElementById('rock');
+const paperBtn = document.getElementById('paper');
+const scissorsBtn = document.getElementById('scissors');
+
+rockBtn.addEventListener('click', () => playerSelection('Rock'));
+paperBtn.addEventListener('click', () => playerSelection('Paper'));
+scissorsBtn.addEventListener('click', () => playerSelection('Scissors'));
+
+
 function isRock(choice) {
     return choice.localeCompare('rock', undefined, { sensitivity: 'accent' }) === 0;
 }
@@ -22,13 +35,16 @@ function computerPlay() {
     }
 }
 
-function playerSelection() {
-    let input = prompt('Please enter rock, paper, or scissors:');
-    if (isRock(input))
+// Replace text enter with user click...
+
+function playerSelection(input) {
+    // process click...
+    let choice = String(input);
+    if (isRock(choice))
         return 'Rock';
-    else if (isPaper(input))
+    else if (isPaper(choice))
         return 'Paper';
-    else if (isScissors(input))
+    else if (isScissors(choice))
         return 'Scissors';
     else
         return 0;
@@ -74,9 +90,9 @@ function game() {
     while (playerScore <= 5 || computerScore <= 5) {
         let playerChoice = playerSelection();
 
+        // Infinite loop...
         while (playerChoice === 0) {
-            alert('Please enter one of the 3 choices.');
-            playerChoice = playerSelection();
+            alert('You done goofed!');
         }
 
         console.log(playRound(playerChoice, computerPlay()));
@@ -89,5 +105,4 @@ function game() {
 
 }
 
-let playerScore = 0, computerScore = 0;
 game();
