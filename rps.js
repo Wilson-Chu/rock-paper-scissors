@@ -1,25 +1,26 @@
 let playerScore = 0, computerScore = 0;
-let input;
-//const buttons = document.querySelectorAll('.btn');
 
-const rockBtn = document.getElementById('rock');
-const paperBtn = document.getElementById('paper');
-const scissorsBtn = document.getElementById('scissors');
+const container = document.querySelector('body');
+const pScore = document.querySelector('.playerScore');
+const cScore = document.querySelector('.compScore');
+
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
 
 rockBtn.addEventListener('click', () => playerSelection('Rock'));
 paperBtn.addEventListener('click', () => playerSelection('Paper'));
 scissorsBtn.addEventListener('click', () => playerSelection('Scissors'));
 
+const pScoring = document.createElement('div');
+pScoring.classList.add('div');
+pScoring.textContent = playerScore;
+pScore.appendChild(pScoring);
 
-function isRock(choice) {
-    return choice.localeCompare('rock', undefined, { sensitivity: 'accent' }) === 0;
-}
-function isPaper(choice) {
-    return choice.localeCompare('paper', undefined, { sensitivity: 'accent' }) === 0;
-}
-function isScissors(choice) {
-    return choice.localeCompare('scissors', undefined, { sensitivity: 'accent' }) === 0;
-}
+const cScoring = document.createElement('div');
+cScoring.classList.add('div');
+cScoring.textContent = computerScore;
+cScore.appendChild(cScoring);
 
 function computerPlay() {
     let computerChoice = Math.floor(Math.random() * 3);
@@ -35,20 +36,25 @@ function computerPlay() {
     }
 }
 
-// Replace text enter with user click...
-
 function playerSelection(input) {
-    // process click...
-    let choice = String(input);
-    if (isRock(choice))
-        return 'Rock';
-    else if (isPaper(choice))
-        return 'Paper';
-    else if (isScissors(choice))
-        return 'Scissors';
-    else
-        return 0;
+    let result = playRound(input, computerPlay());
+    const announce = document.createElement('p');
+    announce.classList.add('p');
+    announce.textContent = result;
+    announce.style.fontFamily = 'Comic Sans';
+    announce.style.color = '#5381ed';
+    container.appendChild(announce);
+
+    if (playerScore === 5) {
+        alert('Congratulations! You are the winner!');
+        //Stop the game or offer restart here...
+    }
+    else if (computerScore === 5) {
+        alert('Try again! The computer won!');
+        // ...
+    }
 }
+
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection)
@@ -56,53 +62,43 @@ function playRound(playerSelection, computerSelection) {
     else if (playerSelection === 'Rock') {
         if (computerSelection === 'Paper') {
             computerScore++;
+            cScoring.textContent = computerScore;
+            cScore.replaceChild(cScoring, cScoring);
             return 'You lose! Paper beats rock.';
         }
         else {
             playerScore++;
+            pScoring.textContent = playerScore;
+            pScore.replaceChild(pScoring, pScoring);
             return 'You win! Rock beats scissors.';
         }
     }
     else if (playerSelection === 'Paper') {
         if (computerSelection === 'Scissors') {
             computerScore++;
+            cScoring.textContent = computerScore;
+            cScore.replaceChild(cScoring, cScoring);
             return 'You lose! Scissors beats paper.';
         }
         else {
             playerScore++;
+            pScoring.textContent = playerScore;
+            pScore.replaceChild(pScoring, pScoring);
             return 'You win! Paper beats rock.';
         }
     }
     else if (playerSelection === 'Scissors') {
         if (computerSelection === 'Rock') {
             computerScore++;
+            cScoring.textContent = computerScore;
+            cScore.replaceChild(cScoring, cScoring);
             return 'You lose! Rock beats scissors.';
         }
         else {
             playerScore++;
+            pScoring.textContent = playerScore;
+            pScore.replaceChild(pScoring, pScoring);
             return 'You win! Scissors beats paper.';
         }
     }
 }
-
-// Plays 5 rounds of Rock Paper Scissors against the computer
-function game() {
-    while (playerScore <= 5 || computerScore <= 5) {
-        let playerChoice = playerSelection();
-
-        // Infinite loop...
-        while (playerChoice === 0) {
-            alert('You done goofed!');
-        }
-
-        console.log(playRound(playerChoice, computerPlay()));
-    }
-
-    if (playerScore == 5)
-        console.log('Congratulations! You are the winner!');
-    else
-        console.log('Try again! The computer won!');
-
-}
-
-game();
