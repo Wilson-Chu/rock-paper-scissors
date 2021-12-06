@@ -1,0 +1,69 @@
+body {
+    background-color: rgb(247, 246, 191);
+}
+
+h1, h2, p {
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+}
+
+p {
+    color: red;
+    font-weight: 700;
+}
+
+img {
+    width: auto;
+    max-width: 200px;
+    height: auto;
+    max-height: 200px;
+    transition: 0.25s;
+}
+
+img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    border: 5px solid orange;
+    transition: all 0.25s;
+}
+
+.pictures {
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    max-height: 200px;
+    gap: 20px;
+}
+
+.pictureBox {
+    display: flex;
+    justify-content: center;
+}
+
+.scoreBox {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    padding-top: 50px;
+}
+
+.score {
+    display: flex;
+    gap: 20px;
+}
+
+.scoreHeading {
+    font-size: large;
+    font-weight: bold;
+}
+
+@media (max-width: 650px) {
+    img {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    .pictures {
+        max-height: 120px;
+    }
+}
