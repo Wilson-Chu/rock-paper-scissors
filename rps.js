@@ -46,12 +46,15 @@ function playerSelection(input) {
     container.appendChild(announce);
 
     if (playerScore === 5) {
-        alert('Congratulations! You are the winner!');
         //Stop the game or offer restart here...
+        alert('Congratulations! You are the winner!');
+        window.location.reload();
+
     }
     else if (computerScore === 5) {
+        //Stop the game or offer restart here...
         alert('Try again! The computer won!');
-        // ...
+        window.location.reload();
     }
 }
 
